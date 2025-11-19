@@ -3,15 +3,19 @@
 #include <cmath>
 #include <vector>
 
+//This code takes a dataset of pedestrian density values and uses it to control the tempo of a drum sound played on the Bela board.
+
 // Example dataset: pedestrian counts per location (0–10 scale)
 std::vector<int> pedestrianDensity = {1, 3, 6, 2, 8, 4, 9, 5};
+
+//Each number controls how fast the drum plays: A low number (like 1) → slow beat: A high number (like 9) → fast beat: It converts density → beats per second with:
+//d=0 → ~1 beat/s, d=10 → ~10 beat/s: float beatsPerSecond = 1.0 + density * 0.9f;
 
 unsigned int currentIndex = 0;
 
 // Drum sample buffer (multi-channel)
 std::vector<std::vector<float>> drum;
 int drumPosition = -1; // -1 means not currently playing
-
 
 // Beat timing
 int samplesUntilNextBeat = 0;
